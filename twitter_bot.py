@@ -14,26 +14,28 @@ def twitter_task(tweet_url):
         
         # Tunggu sampai elemen username tersedia
         WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[4]/label/div/div[2]/div/input"))
+            EC.presence_of_element_located((By.XPATH, "//*[@name='session[username_or_email]']"))
         )
 
         # Input username
-        driver.find_element(By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[4]/label/div/div[2]/div/input").send_keys("krmnlim")
+        driver.find_element(By.XPATH, "//*[@name='session[username_or_email]']").send_keys("krmnlim")
         
         # Tunggu sampai elemen password tersedia
         WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input"))
+            EC.presence_of_element_located((By.XPATH, "//*[@name='session[password]']"))
         )
         
         # Input password
-        driver.find_element(By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input").send_keys("karmin123@")
+        driver.find_element(By.XPATH, "//*[@name='session[password]']").send_keys("karmin123@")
         
-        # Tekan Enter untuk login
-        driver.find_element(By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input").send_keys(Keys.RETURN)
-        
+        # Klik tombol login
+        login_button = "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div/div/button/div"
+        driver.find_element(By.XPATH, login_button).click()
+
         print("[INFO] Berhasil login sebagai krmnlim.")
         time.sleep(5)
 
+        # Akses URL tweet
         driver.get(tweet_url)
         print(f"[INFO] Membuka URL tweet: {tweet_url}.")
         time.sleep(3)
