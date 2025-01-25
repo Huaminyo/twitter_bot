@@ -6,39 +6,31 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 def twitter_task(tweet_url):
+    # Set up the Chrome WebDriver
     driver = webdriver.Chrome()
 
     try:
         print("[INFO] Memulai tugas Twitter.")
         driver.get("https://twitter.com/login")
 
-        # Tunggu dan klik tombol Sign In
-        sign_in_button_xpath = "//*[@data-testid='loginButton']"  # Coba menggunakan atribut data-testid
+        # Tunggu dan masukkan username (gunakan By.NAME atau CSS_SELECTOR jika ada perubahan struktur)
         WebDriverWait(driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, sign_in_button_xpath))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='session[username_or_email]']"))
         )
-        driver.find_element(By.XPATH, sign_in_button_xpath).click()
+        driver.find_element(By.CSS_SELECTOR, "input[name='session[username_or_email]']").send_keys("krmnlim")
 
-        # Tunggu sampai elemen username tersedia dan input username
-        username_xpath = "//*[@name='session[username_or_email]']"  # Gunakan name attribute
+        # Tunggu dan masukkan password
         WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, username_xpath))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='session[password]']"))
         )
-        driver.find_element(By.XPATH, username_xpath).send_keys("krmnlim")
+        driver.find_element(By.CSS_SELECTOR, "input[name='session[password]']").send_keys("karmin123@")
 
-        # Tunggu sampai elemen password tersedia dan input password
-        password_xpath = "//*[@name='session[password]']"  # Gunakan name attribute
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, password_xpath))
-        )
-        driver.find_element(By.XPATH, password_xpath).send_keys("karmin123@")
-        
         # Klik tombol login
-        login_button_xpath = "//span[contains(text(),'Log in')]"  # Gunakan teks tombol login
+        login_button = "//span[contains(text(),'Log in')]"  # Bisa juga gunakan selector yang lebih umum
         WebDriverWait(driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, login_button_xpath))
+            EC.element_to_be_clickable((By.XPATH, login_button))
         )
-        driver.find_element(By.XPATH, login_button_xpath).click()
+        driver.find_element(By.XPATH, login_button).click()
 
         print("[INFO] Berhasil login sebagai krmnlim.")
         time.sleep(5)
