@@ -11,22 +11,27 @@ def twitter_task(tweet_url):
     try:
         print("[INFO] Memulai tugas Twitter.")
         driver.get("https://twitter.com/login")
-        
-        # Tunggu sampai elemen username tersedia (gunakan xpath yang lebih dinamis)
-        WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@name='session[username_or_email]']"))
-        )
 
-        # Input username
-        driver.find_element(By.XPATH, "//input[@name='session[username_or_email]']").send_keys("krmnlim")
-        
-        # Tunggu sampai elemen password tersedia
+        # Tunggu dan klik tombol Sign In
+        sign_in_button_xpath = "//*[@id='react-root']/div/div/div[2]/main/div/div/div[1]/div[1]/div/div[3]/div[4]/a/div/span/span"
         WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@name='session[password]']"))
+            EC.element_to_be_clickable((By.XPATH, sign_in_button_xpath))
         )
+        driver.find_element(By.XPATH, sign_in_button_xpath).click()
         
-        # Input password
-        driver.find_element(By.XPATH, "//input[@name='session[password]']").send_keys("karmin123@")
+        # Tunggu sampai elemen username tersedia dan input username
+        username_xpath = "//*[@id='layers']/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/button[2]/div/span/span"
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, username_xpath))
+        )
+        driver.find_element(By.XPATH, username_xpath).send_keys("krmnlim")
+
+        # Tunggu sampai elemen password tersedia dan input password
+        password_xpath = "//*[@id='layers']/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/button/div"
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.XPATH, password_xpath))
+        )
+        driver.find_element(By.XPATH, password_xpath).send_keys("karmin123@")
         
         # Klik tombol login
         login_button_xpath = "//span[contains(text(),'Log in')]"
