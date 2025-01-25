@@ -13,29 +13,29 @@ def twitter_task(tweet_url):
         driver.get("https://twitter.com/login")
 
         # Tunggu dan klik tombol Sign In
-        sign_in_button_xpath = "//*[@id='react-root']/div/div/div[2]/main/div/div/div[1]/div[1]/div/div[3]/div[4]/a/div/span/span"
-        WebDriverWait(driver, 20).until(
+        sign_in_button_xpath = "//*[@data-testid='loginButton']"  # Coba menggunakan atribut data-testid
+        WebDriverWait(driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, sign_in_button_xpath))
         )
         driver.find_element(By.XPATH, sign_in_button_xpath).click()
-        
+
         # Tunggu sampai elemen username tersedia dan input username
-        username_xpath = "//*[@id='layers']/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/button[2]/div/span/span"
-        WebDriverWait(driver, 20).until(
+        username_xpath = "//*[@name='session[username_or_email]']"  # Gunakan name attribute
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.XPATH, username_xpath))
         )
         driver.find_element(By.XPATH, username_xpath).send_keys("krmnlim")
 
         # Tunggu sampai elemen password tersedia dan input password
-        password_xpath = "//*[@id='layers']/div[2]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/button/div"
-        WebDriverWait(driver, 20).until(
+        password_xpath = "//*[@name='session[password]']"  # Gunakan name attribute
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.XPATH, password_xpath))
         )
         driver.find_element(By.XPATH, password_xpath).send_keys("karmin123@")
         
         # Klik tombol login
-        login_button_xpath = "//span[contains(text(),'Log in')]"
-        WebDriverWait(driver, 20).until(
+        login_button_xpath = "//span[contains(text(),'Log in')]"  # Gunakan teks tombol login
+        WebDriverWait(driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, login_button_xpath))
         )
         driver.find_element(By.XPATH, login_button_xpath).click()
@@ -50,7 +50,7 @@ def twitter_task(tweet_url):
 
         # Klik tombol retweet
         retweet_button_xpath = "//div[@data-testid='retweet']"
-        WebDriverWait(driver, 20).until(
+        WebDriverWait(driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, retweet_button_xpath))
         )
         driver.find_element(By.XPATH, retweet_button_xpath).click()
@@ -59,7 +59,7 @@ def twitter_task(tweet_url):
 
         # Klik tombol like
         like_button_xpath = "//div[@data-testid='like']"
-        WebDriverWait(driver, 20).until(
+        WebDriverWait(driver, 30).until(
             EC.element_to_be_clickable((By.XPATH, like_button_xpath))
         )
         driver.find_element(By.XPATH, like_button_xpath).click()
