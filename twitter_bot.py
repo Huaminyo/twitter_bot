@@ -13,24 +13,24 @@ def twitter_task(tweet_url):
         print("[INFO] Memulai tugas Twitter.")
         driver.get("https://twitter.com/login")
 
-        # Tunggu dan masukkan username (gunakan By.NAME atau CSS_SELECTOR jika ada perubahan struktur)
+        # Tunggu dan masukkan username menggunakan XPath yang Anda berikan
         WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='session[username_or_email]']"))
+            EC.presence_of_element_located((By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[4]/label/div/div[2]/div/input"))
         )
-        driver.find_element(By.CSS_SELECTOR, "input[name='session[username_or_email]']").send_keys("krmnlim")
+        driver.find_element(By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[4]/label/div/div[2]/div/input").send_keys("krmnlim")
 
-        # Tunggu dan masukkan password
+        # Tunggu dan masukkan password menggunakan XPath yang Anda berikan
         WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='session[password]']"))
+            EC.presence_of_element_located((By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input"))
         )
-        driver.find_element(By.CSS_SELECTOR, "input[name='session[password]']").send_keys("karmin123@")
+        driver.find_element(By.XPATH, "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input").send_keys("karmin123@")
 
         # Klik tombol login
-        login_button = "//span[contains(text(),'Log in')]"  # Bisa juga gunakan selector yang lebih umum
+        login_button_xpath = "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/button[2]/div/span/span"
         WebDriverWait(driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, login_button))
+            EC.element_to_be_clickable((By.XPATH, login_button_xpath))
         )
-        driver.find_element(By.XPATH, login_button).click()
+        driver.find_element(By.XPATH, login_button_xpath).click()
 
         print("[INFO] Berhasil login sebagai krmnlim.")
         time.sleep(5)
