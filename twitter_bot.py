@@ -29,11 +29,11 @@ def twitter_task(tweet_url):
         driver.find_element(By.XPATH, "//*[@name='session[password]']").send_keys("karmin123@")
         
         # Klik tombol login
-        login_button = "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div/div/button/div"
+        login_button_xpath = "//*[@data-testid='LoginForm_Login_Button']"
         WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, login_button))
+            EC.element_to_be_clickable((By.XPATH, login_button_xpath))
         )
-        driver.find_element(By.XPATH, login_button).click()
+        driver.find_element(By.XPATH, login_button_xpath).click()
 
         print("[INFO] Berhasil login sebagai krmnlim.")
         time.sleep(5)
@@ -44,20 +44,20 @@ def twitter_task(tweet_url):
         time.sleep(3)
 
         # Klik tombol retweet
-        retweet_button = "//*[@id='id__baxe9tuemra']/div[2]/button/div/div[2]/span/span/span"
+        retweet_button_xpath = "//*[@data-testid='retweet']"
         WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, retweet_button))
+            EC.element_to_be_clickable((By.XPATH, retweet_button_xpath))
         )
-        driver.find_element("xpath", retweet_button).click()
+        driver.find_element(By.XPATH, retweet_button_xpath).click()
         time.sleep(1)
-        driver.find_element("xpath", "//div[@data-testid='retweetConfirm']").click()
+        driver.find_element(By.XPATH, "//div[@data-testid='retweetConfirm']").click()
 
         # Klik tombol like
-        like_button = "//*[@id='id__baxe9tuemra']/div[3]/button/div/div[2]/span/span/span"
+        like_button_xpath = "//*[@data-testid='like']"
         WebDriverWait(driver, 20).until(
-            EC.element_to_be_clickable((By.XPATH, like_button))
+            EC.element_to_be_clickable((By.XPATH, like_button_xpath))
         )
-        driver.find_element("xpath", like_button).click()
+        driver.find_element(By.XPATH, like_button_xpath).click()
 
         print("[INFO] Tugas Twitter selesai.")
     except Exception as e:
