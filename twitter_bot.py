@@ -13,7 +13,7 @@ def twitter_task(tweet_url):
         driver.get("https://twitter.com/login")
         
         # Tunggu sampai elemen username tersedia
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, "//*[@name='session[username_or_email]']"))
         )
 
@@ -21,7 +21,7 @@ def twitter_task(tweet_url):
         driver.find_element(By.XPATH, "//*[@name='session[username_or_email]']").send_keys("krmnlim")
         
         # Tunggu sampai elemen password tersedia
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.XPATH, "//*[@name='session[password]']"))
         )
         
@@ -30,6 +30,9 @@ def twitter_task(tweet_url):
         
         # Klik tombol login
         login_button = "//*[@id='layers']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div/div/button/div"
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, login_button))
+        )
         driver.find_element(By.XPATH, login_button).click()
 
         print("[INFO] Berhasil login sebagai krmnlim.")
@@ -42,12 +45,18 @@ def twitter_task(tweet_url):
 
         # Klik tombol retweet
         retweet_button = "//*[@id='id__baxe9tuemra']/div[2]/button/div/div[2]/span/span/span"
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, retweet_button))
+        )
         driver.find_element("xpath", retweet_button).click()
         time.sleep(1)
         driver.find_element("xpath", "//div[@data-testid='retweetConfirm']").click()
 
         # Klik tombol like
         like_button = "//*[@id='id__baxe9tuemra']/div[3]/button/div/div[2]/span/span/span"
+        WebDriverWait(driver, 20).until(
+            EC.element_to_be_clickable((By.XPATH, like_button))
+        )
         driver.find_element("xpath", like_button).click()
 
         print("[INFO] Tugas Twitter selesai.")
