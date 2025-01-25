@@ -12,24 +12,24 @@ def twitter_task(tweet_url):
         print("[INFO] Memulai tugas Twitter.")
         driver.get("https://twitter.com/login")
         
-        # Tunggu sampai elemen username tersedia
+        # Tunggu sampai elemen username tersedia (gunakan xpath yang lebih dinamis)
         WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@name='session[username_or_email]']"))
+            EC.presence_of_element_located((By.XPATH, "//input[@name='session[username_or_email]']"))
         )
 
         # Input username
-        driver.find_element(By.XPATH, "//*[@name='session[username_or_email]']").send_keys("krmnlim")
+        driver.find_element(By.XPATH, "//input[@name='session[username_or_email]']").send_keys("krmnlim")
         
         # Tunggu sampai elemen password tersedia
         WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@name='session[password]']"))
+            EC.presence_of_element_located((By.XPATH, "//input[@name='session[password]']"))
         )
         
         # Input password
-        driver.find_element(By.XPATH, "//*[@name='session[password]']").send_keys("karmin123@")
+        driver.find_element(By.XPATH, "//input[@name='session[password]']").send_keys("karmin123@")
         
         # Klik tombol login
-        login_button_xpath = "//*[@data-testid='LoginForm_Login_Button']"
+        login_button_xpath = "//span[contains(text(),'Log in')]"
         WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, login_button_xpath))
         )
@@ -44,7 +44,7 @@ def twitter_task(tweet_url):
         time.sleep(3)
 
         # Klik tombol retweet
-        retweet_button_xpath = "//*[@data-testid='retweet']"
+        retweet_button_xpath = "//div[@data-testid='retweet']"
         WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, retweet_button_xpath))
         )
@@ -53,7 +53,7 @@ def twitter_task(tweet_url):
         driver.find_element(By.XPATH, "//div[@data-testid='retweetConfirm']").click()
 
         # Klik tombol like
-        like_button_xpath = "//*[@data-testid='like']"
+        like_button_xpath = "//div[@data-testid='like']"
         WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, like_button_xpath))
         )
